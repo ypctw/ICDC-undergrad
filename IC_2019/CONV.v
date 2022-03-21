@@ -175,78 +175,77 @@ begin
                     cdata_wr <= 0;
                 else
                     cdata_wr <= conv_temp[35:16] + conv_temp[15]; // riounding
+                csel<= 3'b001;
+                STATE <= 13;
             end
-            csel<= 3'b001;
-            STATE <= 13;
-        end
-        13:
-        begin
-            csel<= 3'b000;
-            cwr <= 0;
-            caddr_wr <= 'hx;
-            cdata_wr <= 'hx;
-            STATE <= 2;
-            pivot <= pivot + 1;
-            iaddr <= pivot - 64;
-            if(pivot == 4095)
-                STATE <= 14;
-            else
+            13:
+            begin
+                csel<= 3'b000;
+                cwr <= 0;
+                caddr_wr <= 'hx;
+                cdata_wr <= 'hx;
                 STATE <= 2;
-        end
-        14:
-        begin
-            csel <= 3'b001;
-            crd <= 1;
-            cwr <= 0;
-            caddr_wr <= 'hx;
-            cdata_wr <= 'hx;
-            caddr_rd <= {layer2[9:5], 1'b0, layer2[4:0], 1'b0 };
-            STATE <= 15;
-        end
-        15: // (0,0)
-        begin
-            caddr_rd <= {layer2[9:5], 1'b0, layer2[4:0], 1'b1 };
-            conv_temp <= cdata_rd;
-            STATE <= 16;
-        end
-        16: // (1,0)
-        begin
-            caddr_rd <= {layer2[9:5] , 1'b1, layer2[4:0], 1'b0 };
-            conv_temp <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
-            STATE <= 17;
-        end
-        17: // (0,1)
-        begin
-            caddr_rd <= {layer2[9:5], 1'b1, layer2[4:0], 1'b1 };
-            conv_temp <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
-            STATE <= 18;
-        end
-        18:
-        begin
-            crd <= 0;
-            csel <= 3'b011;
-            cwr <= 1;
-            caddr_wr <= layer2;
-            cdata_wr <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
-            if (layer2 == 1023)
-                STATE <= 19;
-            else
-                STATE <= 14;
-            layer2 <= layer2 + 1;
-        end
-        19:
-        begin
-            csel <= 3'b000;
-            cwr <= 0;
-            caddr_wr <= 'hx;
-            cdata_wr <= 'hx;
-            busy <= 0;
-        end
-        default:
-        begin
-            STATE <= 0;
-        end
-    endcase
-end
+                pivot <= pivot + 1;
+                iaddr <= pivot - 64;
+                if(pivot == 4095)
+                    STATE <= 14;
+                else
+                    STATE <= 2;
+            end
+            14:
+            begin
+                csel <= 3'b001;
+                crd <= 1;
+                cwr <= 0;
+                caddr_wr <= 'hx;
+                cdata_wr <= 'hx;
+                caddr_rd <= {layer2[9:5], 1'b0, layer2[4:0], 1'b0 };
+                STATE <= 15;
+            end
+            15: // (0,0)
+            begin
+                caddr_rd <= {layer2[9:5], 1'b0, layer2[4:0], 1'b1 };
+                conv_temp <= cdata_rd;
+                STATE <= 16;
+            end
+            16: // (1,0)
+            begin
+                caddr_rd <= {layer2[9:5] , 1'b1, layer2[4:0], 1'b0 };
+                conv_temp <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
+                STATE <= 17;
+            end
+            17: // (0,1)
+            begin
+                caddr_rd <= {layer2[9:5], 1'b1, layer2[4:0], 1'b1 };
+                conv_temp <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
+                STATE <= 18;
+            end
+            18:
+            begin
+                crd <= 0;
+                csel <= 3'b011;
+                cwr <= 1;
+                caddr_wr <= layer2;
+                cdata_wr <= conv_temp < cdata_rd ? cdata_rd : conv_temp;
+                if (layer2 == 1023)
+                    STATE <= 19;
+                else
+                    STATE <= 14;
+                layer2 <= layer2 + 1;
+            end
+            19:
+            begin
+                csel <= 3'b000;
+                cwr <= 0;
+                caddr_wr <= 'hx;
+                cdata_wr <= 'hx;
+                busy <= 0;
+            end
+            default:
+            begin
+                STATE <= 0;
+            end
+        endcase
+    end
 end
 endmodule
