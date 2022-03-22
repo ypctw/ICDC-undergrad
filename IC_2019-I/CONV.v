@@ -25,27 +25,23 @@ reg [5:0] STATE;
 reg [11:0] pivot;
 reg [9:0] layer2;
 reg [35:0] conv_temp;
-initial
-begin
-    busy <= 0;
-    iaddr <= 0;
-    crd <= 0;
-    caddr_rd <= 0;
-    cdata_wr <= 0;
-    cwr <= 0;
-    csel <= 0;
-    bias <= 20'h01310;
-    layer2 <= 0;
-end
+
 assign conv_ans = ({16'd0,kernel} * {16'd0,conv_2_mul});
-always@(posedge clk)
+always@(posedge clk or posedge reset)
 begin
     if(reset)
     begin
-        STATE <= 1;
-        cwr <= 0;
+        STATE <= 1; 
         iaddr <= 0;
         csel <= 0;
+        busy <= 0;
+        iaddr <= 0;
+        crd <= 0;
+        caddr_rd <= 0;
+        cdata_wr <= 0;
+        cwr <= 0;
+        bias <= 20'h01310;
+        layer2 <= 0;
     end
     else
     begin
@@ -82,8 +78,7 @@ begin
                 if (pivot[11:6] == 0 )
                     conv_2_mul <= 0; // (0)
                 else
-                    conv_2_mul <= idata;
-                kernel <=  20'h092D5;
+                    kernel <=  20'h092D5;
                 iaddr <= iaddr + 1;// (0,2)
                 conv_temp <= conv_temp + conv_ans;
                 STATE <= 4;
