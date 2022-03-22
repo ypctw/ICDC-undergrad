@@ -15,6 +15,7 @@
 
 ## IC 2020-I(大學部) with [name=葉承軒]
 ### Area : `20625`
+- compile_ultra `18800`
 ### Viewpoint
 - 使用 `combinational Circuit`
 ```Verilog

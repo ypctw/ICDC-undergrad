@@ -13,17 +13,14 @@ localparam Dollar = 8'h24;
 localparam Dot = 8'h2E;
 localparam Space = 8'h20;
 
-localparam LOAD = 4;
-localparam OUTPUT = 5;
-localparam X_X = 2'b00; 
-localparam H_X = 2'b10; 
-localparam X_D = 2'b01; 
-localparam H_D = 2'b11; 
+localparam LOAD = 0;
+localparam OUTPUT = 1;
+localparam PROCESS = 2;
 
 reg match, valid;
 reg [4:0] match_index;
 
-reg [2:0] cur_state, next_state;
+reg [1:0] cur_state, next_state;
 reg [7:0] string[31:0], pattern[7:0];
 reg [5:0] str_idx, pat_idx;
 reg [5:0] str_max, pat_max;
@@ -39,9 +36,9 @@ always @(*)
 begin
     next_state = cur_state;
     case (cur_state)
-        LOAD: if (!isstring && !ispattern) next_state = mode;
-        OUTPUT: next_state = LOAD;
-        default: if(finish) next_state = OUTPUT;
+        LOAD: if (!isstring && !ispattern) next_state = PROCESS;
+        PROCESS: if (finish) next_state = OUTPUT;
+        default: next_state = LOAD;
     endcase
 end
 
@@ -61,8 +58,6 @@ begin
         case(cur_state)
             LOAD: begin
                 valid <= 0;
-                //match_index <= 'hx;
-                //match <= 'hx;
                 str_idx <= 0;
                 pat_idx <= 0;
                 if(isstring) begin
@@ -89,87 +84,7 @@ begin
                     str_ptr <= 1;
                 end
             end
-            X_X: begin //None
-                if (str_idx == str_max + 1) begin // overflow
-                    success <= 0;
-                    finish <= 1;
-                end
-                else if (string[str_idx] == pattern[pat_idx] || pattern[pat_idx] == Dot) begin
-                    if(pat_idx == pat_max) begin
-                        success <= 1;
-                        match_index <= str_idx - pat_max; // Head Index of pattern in string
-                        finish <= 1;
-                    end
-                    else begin
-                        str_idx <= str_idx + 1;
-                        pat_idx <= pat_idx + 1;
-                    end
-                end
-                else begin
-                    pat_idx <= 0;
-                    str_idx <= str_ptr;
-                    str_ptr <= str_ptr + 1;
-                end
-            end
-            X_D: begin // Dollar
-                if (str_idx == str_max + 1)begin // overflow
-                    success <= 0;
-                    finish <= 1;
-                end
-                else if (string[str_idx] == pattern[pat_idx] || pattern[pat_idx] == Dot) begin
-                    if(pat_idx == pat_max) begin
-                        if (is_D) begin
-                            finish <= 1;
-                            match_index <= str_idx - pat_max;
-                            success <= 1;
-                        end
-                        else begin
-                            pat_idx <= 0;
-                            str_idx <= str_ptr;
-                            str_ptr <= str_ptr + 1;
-                        end
-                    end
-                    else begin
-                        str_idx <= str_idx + 1;
-                        pat_idx <= pat_idx + 1;
-                    end
-                end
-                else begin
-                    pat_idx <= 0;
-                    str_idx <= str_ptr;
-                    str_ptr <= str_ptr + 1;
-                end                     
-            end
-            H_X:begin //Hat
-                if (str_idx == str_max + 1) begin// overflow
-                    success <= 0;
-                    finish <= 1;
-                end
-                else if (string[str_idx] == pattern[pat_idx] || pattern[pat_idx] == Dot) begin
-                    if(pat_idx == pat_max) begin
-                        if (is_H) begin
-                            finish <= 1;
-                            match_index <= str_idx - pat_max;
-                            success <= 1;
-                        end
-                        else begin
-                            pat_idx <= 0;
-                            str_idx <= str_ptr;
-                            str_ptr <= str_ptr + 1;
-                        end
-                    end
-                    else begin
-                        str_idx <= str_idx + 1;
-                        pat_idx <= pat_idx + 1;
-                    end
-                end
-                else begin
-                    pat_idx <= 0;
-                    str_idx <= str_ptr;
-                    str_ptr <= str_ptr + 1;
-                end
-            end
-            H_D:begin // both
+            PROCESS:begin // both
                 if (str_idx == str_max + 1) begin // overflow
                     finish <= 1;
                     success <= 0;
@@ -198,9 +113,10 @@ begin
                     str_ptr <= str_ptr + 1;
                 end
             end
-            OUTPUT:begin
+            default: begin
                 valid <= 1;
                 finish <= 0;
+                success <= 'hx;
                 if(success) begin
                     match <= 1;
                 end
@@ -225,35 +141,17 @@ begin
         cur_state <= next_state;
 end
 
-always @(*) 
+always @(*)
 begin
-    is_D = 0;
-    is_H = 0;
-    if (str_idx == pat_max) is_H = 1;
+    if (mode == 2'b00 || mode == 2'b01) is_H = 1;
+    else if (str_idx == pat_max) is_H = 1;
     else if (string[str_idx - pat_max - 1] == Space) is_H = 1;
     else is_H = 0;
         
-    if (str_idx == str_max) is_D = 1;
+    if (mode == 2'b00 || mode == 2'b10) is_D = 1;
+    else if (str_idx == str_max) is_D = 1;
     else if (string[str_idx + 1] == Space) is_D = 1;
     else is_D = 0;
 end
 
-// always @(*) 
-// begin
-//     is_H = 0;
-//     if (str_idx == pat_max) is_H = 1;
-//     else begin
-//         index = str_idx >= pat_max + 1 ? str_idx - pat_max - 1:0;
-//         if(str_idx >= pat_max + 1) begin
-//             if (string[index] == Space) is_H = 1;
-//         end
-//     end
-
-//     is_D = 0;
-//     if (str_idx == str_max) is_D = 1;
-//     else begin
-//         index = str_idx < str_max ? str_idx + 1 : 0; 
-//         if (string[index] == Space) is_D = 1;
-//     end
-// end
 endmodule
