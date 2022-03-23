@@ -128,7 +128,6 @@ begin
                 mode <= 0;
             end
         endcase
-
     end
 
 end

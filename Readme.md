@@ -1,5 +1,5 @@
 # ICDC
-## ICDC 2019-I(大學部) 
+## ICDC-E 2019-I(大學部) 
 - `CONV.v`
 ### 注意：
 - 要將 `dat_univ` 資料夾向上層移動
@@ -13,7 +13,7 @@
 - 難點(4)：`initial`不要用
   - 直接放在reset裡面！
 
-## ICDC 2020-I(大學部) with [name=葉承軒]
+## ICDC-E 2020-I(大學部) with [name=葉承軒]
 ### Area : `20625`
 - compile_ultra `18800`
 ### Viewpoint
