@@ -1,5 +1,18 @@
 # ICDC
-## ICDC-E 2019-I(大學部) 
+![](https://img.shields.io/badge/code_language-Verilog-blueviolet)  ![](https://img.shields.io/badge/HDL_simulator-ncVerilog-blue)
+## ICDC-B 2017-I(碩士班) - Distance Transform  
+![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red) ![](https://img.shields.io/badge/Report_area-6321-blue) ![](https://img.shields.io/badge/Report_timing-1374150_ns-purple)
+- `DT.v` 
+### 困難點
+- 難點(1)：`Latch`
+  - 假設一個 `reg` 出現 `latch` 一定要處理，有可能僅只有附值為1忘記給0
+- 難點(2)：`Ram`
+  - 這邊可以使用RAM去把ROM的值存起來
+- 難點(3)：`面積`
+  - 如果使用Default可以避免latch但是面積會小幅增加(對於壓面積不利)
+### Conclusion
+  - 本題比較需要看波形圖，尤其是讀檔案的部分需要特別注意
+## ICDC-E 2019-I(大學部) - Image Convolutional Circuit Design
 - `CONV.v`
 ### 注意：
 - 要將 `dat_univ` 資料夾向上層移動
@@ -13,9 +26,9 @@
 - 難點(4)：`initial`不要用
   - 直接放在reset裡面！
 
-## ICDC-E 2020-I(大學部) with [name=葉承軒]
-### Area : `20625`
-- compile_ultra `18800`
+## ICDC-E 2020-I(大學部)
+![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red) ![](https://img.shields.io/badge/report_area-20625-blue) ![](https://img.shields.io/badge/report_timing-18800_ns-purple)
+
 ### Viewpoint
 - 使用 `combinational Circuit`
 ```Verilog
