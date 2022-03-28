@@ -1,7 +1,7 @@
 # ICDC
 ![](https://img.shields.io/badge/code_language-Verilog-blueviolet)  ![](https://img.shields.io/badge/HDL_simulator-ncVerilog-blue)
 ## ICDC-B 2017-I(碩士班) - Distance Transform  
-![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red) ![](https://img.shields.io/badge/Report_area-6321-blue) ![](https://img.shields.io/badge/Report_timing-1374150_ns-purple)
+[![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red)](https://github.com/jacky40511) ![](https://img.shields.io/badge/Report_area-6321-blue) ![](https://img.shields.io/badge/Report_timing-1374150_ns-purple)
 - `DT.v` 
 ### 困難點
 - 難點(1)：`Latch`
@@ -27,7 +27,7 @@
   - 直接放在reset裡面！
 
 ## ICDC-E 2020-I(大學部)
-![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red) ![](https://img.shields.io/badge/report_area-20625-blue) ![](https://img.shields.io/badge/report_timing-18800_ns-purple)
+[![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red)](https://github.com/jacky40511) ![](https://img.shields.io/badge/report_area-20625-blue) ![](https://img.shields.io/badge/report_timing-18800_ns-purple)
 
 ### Viewpoint
 - 使用 `combinational Circuit`
