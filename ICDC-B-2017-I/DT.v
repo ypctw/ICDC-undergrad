@@ -102,6 +102,7 @@ always @(posedge clk or negedge reset) begin
 				{ram_y, ram_x} <= pivot; // 2(res_di) == Center
 			end
 			2:begin
+				sti_rd <= 0;
 				if (pivot == 16255)  pivot <= 16254;
 				else if(res_di == 0) pivot <= pivot + 1;
 				else {ram_y, ram_x} <= pivot + W;
@@ -159,19 +160,12 @@ always @(posedge clk or negedge reset) begin
 			default: begin
 				res_wr <= 0;
 			end
-
-
-
-
-
 		endcase
 	end
-
 end
 
 always @(posedge clk or negedge reset) begin
 	if (!reset) cur_state <= 0;
 	else cur_state <= next_state;
 end
-
 endmodule
