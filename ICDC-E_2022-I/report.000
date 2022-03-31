@@ -1,0 +1,17 @@
+
+FTP account:                       Exxxxx
+
+Level:                             A/B/C/D
+cycle:                             600000
+Synthesis area:                    10000
+
+--- RTL category---
+HDL simulator :                    ncverilog/irun/vcs/vsim/... 
+RTL filename :                     JAM.v            
+
+--- Pre-layout gate-level ---
+gate-levelfilename:                JAM_syn.v  
+gate-level sdf filename:           JAM_syn.sdf        
+
+-----(annotation)--------------------------------------------------------
+ (optional, write down anything that you want grader know)
