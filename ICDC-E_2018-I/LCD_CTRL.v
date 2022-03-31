@@ -8,14 +8,17 @@ output reg IROM_rd;
 output reg [5:0] IROM_A;
 output reg IRAM_valid;
 output reg [7:0] IRAM_D;
-output reg [5:0] IRAM_A;
+output wire [5:0] IRAM_A;
 output reg busy;
 output reg done;
 
-reg [3:0] FSM;
+reg [3:0] cur_state,next_state;
 reg [7:0] image [0:63];
 reg [2:0] image_X;
 reg [2:0] image_Y;
+
+assign 
+
 
 always @(posedge reset or posedge clk) begin
     if(reset) begin
@@ -41,8 +44,18 @@ always @(posedge reset or posedge clk) begin
     else if(cmd_valid && !busy) begin
         busy <= 1;
         FSM <= cmd;
+        {image_Y,image_X} <= 0;
     end
     else begin
+        case (FSM)
+            0:begin
+
+                {image_Y,image_X} <= {image_Y,image_X} + 1;
+            end
+            1:
+            2: 
+            default: 
+        endcase
     end
 end
 
