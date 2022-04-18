@@ -54,4 +54,5 @@ end
 - 難點(2)：`combinational Circuit` (不要被`Sequential Circuit` 給綁著)
 
 ## ICDC-E 2021-I(大學部) - [Geofence](http://icc.tsri.org.tw/ICC2021/)
+![](https://img.shields.io/badge/Report_area-20850-blue)
 ## ICDC-E 2022-I(大學部) - [Job Assignment Machine](http://icc.tsri.org.tw/ICC2022/)

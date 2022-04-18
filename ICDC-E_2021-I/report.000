@@ -3,10 +3,10 @@ FTP account:                       Exxxxx
 
 Level:                             A/B/C/D
 Object pass number :               50
-Synthesis area:                    20000
+Synthesis area:                    20850
 
 --- RTL category---
-HDL simulator :                    ncverilog/irun/vcs/vsim/... 
+HDL simulator :                    ncverilog
 RTL filename :                     geofence.v            
 
 --- Pre-layout gate-level ---
