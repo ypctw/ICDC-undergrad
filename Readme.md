@@ -1,7 +1,10 @@
 # ICDC
 
 ![](https://img.shields.io/badge/code_language-Verilog-blueviolet)  ![](https://img.shields.io/badge/HDL_simulator-ncVerilog-blue)
-## ICDC-B 2017-I(碩士班) - [Distance Transform](https://icc.tsri.org.tw/ICC2017/)   
+## ICDC-B 2015-II(Graduate) - Image Sorting Engine
+[![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red)](https://github.com/jacky40511) ![](https://img.shields.io/badge/Report_area-69842-blue) ![](https://img.shields.io/badge/Report_timing-6298980_ns-purple)
+
+## ICDC-B 2017-I(Graduate) - [Distance Transform](https://icc.tsri.org.tw/ICC2017/)   
 [![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red)](https://github.com/jacky40511) ![](https://img.shields.io/badge/Report_area-6321-blue) ![](https://img.shields.io/badge/Report_timing-1374150_ns-purple)
 - `DT.v` 
 ### 困難點
@@ -13,7 +16,7 @@
   - 如果使用Default可以避免latch但是面積會小幅增加(對於壓面積不利)
 ### Conclusion
   - 本題比較需要看波形圖，尤其是讀檔案的部分需要特別注意
-## ICDC-E 2019-I(大學部) - Image Convolutional Circuit Design
+## ICDC-E 2019-I(Undergraduate) - Image Convolutional Circuit Design
 - `CONV.v`
 ### 注意：
 - 要將 `dat_univ` 資料夾向上層移動
@@ -26,9 +29,9 @@
   - 解決方式：共用乘法器，用assign!
 - 難點(4)：`initial`不要用
   - 直接放在reset裡面！
-## ICDC-E 2018-I(大學部) - [Image Display Control](http://icc.tsri.org.tw/ICC2018/)
-## ICDC-E 2019-I(大學部) - [Image Convolutional Circuit Design](http://icc.tsri.org.tw/ICC2019/)
-## ICDC-E 2020-I(大學部) - [String Matching Engine](http://icc.tsri.org.tw/ICC2020/)
+## ICDC-E 2018-I(Undergraduate) - [Image Display Control](http://icc.tsri.org.tw/ICC2018/)
+## ICDC-E 2019-I(Undergraduate) - [Image Convolutional Circuit Design](http://icc.tsri.org.tw/ICC2019/)
+## ICDC-E 2020-I(Undergraduate) - [String Matching Engine](http://icc.tsri.org.tw/ICC2020/)
 [![](https://img.shields.io/badge/collaborator-%E8%91%89%E6%89%BF%E8%BB%92-red)](https://github.com/jacky40511) ![](https://img.shields.io/badge/report_area-20625-blue) ![](https://img.shields.io/badge/report_timing-18800_ns-purple)
 
 ### Viewpoint
@@ -53,6 +56,6 @@ end
   - 如果將cycle條大還是沒用，那代表電路設計有問題
 - 難點(2)：`combinational Circuit` (不要被`Sequential Circuit` 給綁著)
 
-## ICDC-E 2021-I(大學部) - [Geofence](http://icc.tsri.org.tw/ICC2021/)
+## ICDC-E 2021-I(Undergraduate) - [Geofence](http://icc.tsri.org.tw/ICC2021/)
 ![](https://img.shields.io/badge/Report_area-20850-blue)
-## ICDC-E 2022-I(大學部) - [Job Assignment Machine](http://icc.tsri.org.tw/ICC2022/)
+## ICDC-E 2022-I(Undergraduate) - [Job Assignment Machine](http://icc.tsri.org.tw/ICC2022/)
